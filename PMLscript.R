@@ -40,9 +40,9 @@ pmlTesting = rawTraining[-inTrain,]
  
 # build data subsets for combinations of variables (in this case Belt roll, pitch and yaw)
 numericVar = c(8:10,37:39,46:48,60:62,84:86,113:115,122:124,151:153)
-factVar = c(2,12:17,46:48,87:92,95,98,125:130,133,136,139)    
+factVar = c(2,12:17,46:48,87:92,95,98,125:130,133,136,139)
 currentVar = c(numericVar, factVar,160)
-
+currentVar = c(8:10,160)
 # restrict sets to only those columns specified in the currentVar list
 currentTraining = pmlTraining[,currentVar]
 currentTesting  = pmlTesting[,currentVar]
@@ -56,5 +56,7 @@ prediction = predict(trainedModel,currentTesting)
 
 # create confusion matrix and display results
 confusionMatrix(currentTesting$classe, prediction)
+featurePlot(x=rawTraining[,c(8,9,10)], y = rawTraining$classe,plot= "pairs")
+qplot(rawTraining[,8], rawTraining[,9], colour = rawTraining$classe, data = rawTraining[,])
 
 # End
